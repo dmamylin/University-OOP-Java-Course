@@ -18,7 +18,7 @@ final public class LineSegment {
     }
     
     public IVector getDirectionVector() {
-        return endPoint.sub(endPoint);
+        return endPoint.sub(startPoint).normalize();
     }
     
     public double length() {
@@ -30,11 +30,11 @@ final public class LineSegment {
     }
     
     public double distanceTo(IVector point) {
-        IVector triangleSide1 = point.sub(startPoint).normalize();
-        IVector triangleSide2 = getDirectionVector().normalize();
+        IVector triangleSide1 = point.sub(startPoint);
+        IVector triangleSide2 = endPoint.sub(startPoint);
         double cosBetween = triangleSide1.dotProduct(triangleSide2);
-        double projLength = cosBetween * triangleSide1.length();
+        double projLength = cosBetween / triangleSide2.length();
         
-        return triangleSide2.mul(projLength).sub(point).length();
+        return triangleSide2.normalize().mul(projLength).add(startPoint).sub(point).length();
     }
 }
