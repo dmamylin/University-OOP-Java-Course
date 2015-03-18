@@ -73,6 +73,11 @@ public class Vector2d implements IVector {
     }
     
     @Override
+    public double projectionTo(IVector other) {
+        return dotProduct(other) / other.length();
+    }
+    
+    @Override
     public String toString() {
         return "(" + x + ", " + y + ")";
     }

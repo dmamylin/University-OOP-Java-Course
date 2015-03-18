@@ -11,5 +11,6 @@ public interface IVector {
     public IVector negate();
     public IVector normalize();
     public boolean isEqual(IVector other);
+    public double projectionTo(IVector other);
     @Override public String toString();
 }
