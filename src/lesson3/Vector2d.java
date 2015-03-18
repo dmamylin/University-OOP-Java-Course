@@ -3,6 +3,24 @@ package lesson3;
 public class Vector2d implements IVector {
     public final double x, y;
     
+    @Override
+    public int dimension() {
+        return 2;
+    }
+    
+    @Override
+    public double getComponent(int i) {
+        switch(i) {
+            case 0:
+                return x;
+            case 1:
+                return y;
+            default:
+                System.out.println("Wrong vector component number: " + i);
+                return Double.NaN;
+        }
+    }
+    
     public Vector2d(double x, double y) {
         this.x = x;
         this.y = y;

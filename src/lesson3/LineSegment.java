@@ -4,7 +4,30 @@ final public class LineSegment {
     private final IVector startPoint;
     private final IVector endPoint;
     
+    // Точки должны находиться в пространстве одной размерности и не совпадать
+    // Иначе будет выброшено исключение IllegalArgumentException
     public LineSegment(IVector startPoint, IVector endPoint) {
+        if (startPoint.dimension() != endPoint.dimension()) {
+            throw new IllegalArgumentException(
+                    "Points must be in a same linear space. Dimension mismatch!");
+        }
+        
+        int dimension = startPoint.dimension();
+        boolean pointsAreEqual = true;
+        
+        for (int i = 0; i < dimension; i++) {
+            if (Double.compare(startPoint.getComponent(i),
+                    endPoint.getComponent(i)) != 0) {
+                pointsAreEqual = false;
+                break;
+            }
+        }
+        
+        if (pointsAreEqual) {
+            throw new IllegalArgumentException(
+                    "There is no unique line through an equal points!");
+        }
+        
         this.startPoint = startPoint;
         this.endPoint = endPoint;
     }

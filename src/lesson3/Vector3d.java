@@ -3,6 +3,26 @@ package lesson3;
 public class Vector3d implements IVector {
     public final double x, y, z;
     
+    @Override
+    public int dimension() {
+        return 3;
+    }
+    
+    @Override
+    public double getComponent(int i) {
+        switch(i) {
+            case 0:
+                return x;
+            case 1:
+                return y;
+            case 2:
+                return z;
+            default:
+                System.out.println("Wrong vector component number: " + i);
+                return Double.NaN;
+        }
+    }
+    
     public Vector3d(double x, double y, double z) {
         this.x = x;
         this.y = y;
