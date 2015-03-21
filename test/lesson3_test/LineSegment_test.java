@@ -55,7 +55,8 @@ public class LineSegment_test {
         
         LineSegment line = new LineSegment(start, end);
         
-        final double testResult = 0.0;
+        final double testResult = Math.min(start.sub(testPoint).length(),
+                end.sub(testPoint).length());
         double distance = line.distanceTo(testPoint);
         
         assertTrue(VectorCompare.compare(distance, testResult));
@@ -111,7 +112,8 @@ public class LineSegment_test {
         
         LineSegment line = new LineSegment(start, end);
         
-        final double testResult = 54.0;
+        final double testResult = Math.min(start.sub(testPoint).length(),
+                end.sub(testPoint).length());
         double distance = line.distanceTo(testPoint);
         
         assertTrue(VectorCompare.compare(distance, testResult));
@@ -125,7 +127,8 @@ public class LineSegment_test {
         
         LineSegment line = new LineSegment(start, end);
         
-        final double testResult = 54.0;
+        final double testResult = Math.min(start.sub(testPoint).length(),
+                end.sub(testPoint).length());
         double distance = line.distanceTo(testPoint);
         
         assertTrue(VectorCompare.compare(distance, testResult));
@@ -139,8 +142,41 @@ public class LineSegment_test {
         
         LineSegment line = new LineSegment(start, end);
         
-        final double testResult = 54.0;
+        final double testResult = Math.min(start.sub(testPoint).length(),
+                end.sub(testPoint).length());
         double distance = line.distanceTo(testPoint);
+        
+        assertTrue(VectorCompare.compare(distance, testResult));
+    }
+    
+    @Test
+    public void test_distanceTo_11() {
+        Vector3d start = new Vector3d(0.0, 0.0, 0.0);
+        Vector3d end = new Vector3d(2.0, 0.0, 0.0);
+        Vector3d testPoint = new Vector3d(3.0, 4.0, 4.0);
+        
+        LineSegment line = new LineSegment(start, end);
+        
+        final double testResult = Math.min(start.sub(testPoint).length(),
+                end.sub(testPoint).length());
+        double distance = line.distanceTo(testPoint);
+        
+        assertTrue(VectorCompare.compare(distance, testResult));
+    }
+    
+    @Test
+    public void test_distanceTo_12() {
+        Vector3d start = new Vector3d(0.0, 0.0, 0.0);
+        Vector3d end = new Vector3d(0.0, 0.0, 3.0);
+        Vector3d testPoint = new Vector3d(1.0, 0.0, -1.0);
+        
+        LineSegment line = new LineSegment(start, end);
+        
+        final double testResult = Math.min(start.sub(testPoint).length(),
+                end.sub(testPoint).length());
+        double distance = line.distanceTo(testPoint);
+        
+        System.out.println(testResult + " " + distance);
         
         assertTrue(VectorCompare.compare(distance, testResult));
     }

@@ -53,11 +53,22 @@ final public class LineSegment {
     }
     
     public double distanceTo(IVector point) {
+        // Сначала находим проекцию точки point на прямуювдоль ее нормали,
+        // содержащую данный отрезок
         IVector triangleSide1 = point.sub(startPoint);
         IVector triangleSide2 = endPoint.sub(startPoint);
         double cosBetween = triangleSide1.dotProduct(triangleSide2);
         double projLength = cosBetween / triangleSide2.length();
         
-        return triangleSide2.normalize().mul(projLength).add(startPoint).sub(point).length();
+        // Нашли
+        IVector projection = triangleSide2.normalize().mul(projLength).add(startPoint);
+        
+        // Проверяем, содержит ли отрезок найденную точку
+        double coeff = point.sub(startPoint).length() / startPoint.sub(endPoint).length();
+        if (coeff <= 1.0 && endPoint.sub(startPoint).dotProduct(point.sub(startPoint)) >= 0.0) { // Содержит
+            return projection.sub(point).length();
+        } else {
+            return Math.min(point.sub(startPoint).length(), point.sub(endPoint).length());
+        }
     }
 }
